@@ -1,0 +1,28 @@
+from ipywidgets import Textarea, Output, VBox
+from IPython.display import display
+
+# Create a Textarea widget for input
+text_area = Textarea(
+    value='',
+    placeholder='Type something here...',
+    description='Input:',
+    disabled=False
+)
+
+# Create an Output widget to display the text
+output_widget = Output()
+
+# Function to handle input changes
+def handle_input_change(change):
+    with output_widget:
+        output_widget.clear_output()
+        print(f"You typed: {change['new']}")
+
+# Observe changes in the Textarea
+text_area.observe(handle_input_change, names='value')
+
+# Arrange the widgets vertically
+vbox = VBox([text_area, output_widget])
+
+# Display the widgets
+display(vbox)
